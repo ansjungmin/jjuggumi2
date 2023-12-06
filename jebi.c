@@ -32,10 +32,11 @@ void jebi() {
 	
 
 	for (int i = 0; i < n_player; i++) {   //남은 플레이어 수 세기
-		if (player[i] == true)
+		if (player[i].is_alive == true)
 			surPlayers++;
 	}
 	int start = true;
+	n_alive = n_player;
 	while (start) {
 		if (5 < n_player) {
 			map_init(5, 18 + n_player);
@@ -51,7 +52,7 @@ void jebi() {
 		int turnPlayer = -1;
 
 		for (int i = 0; i < n_player; i++) {
-			if (player[i] == true) {
+			if (player[i].is_alive == true) {
 				turnPlayer = i;
 
 				break;
@@ -82,7 +83,7 @@ void jebi() {
 						printf("우승자를 가리지 못했습니다\n");
 						printf("--살아남은 플레이어--\n");
 						for (int i = 0; i < n_player; i++) {
-							if (player[i] == true) {
+							if (player[i].is_alive == true) {
 								turnPlayer = i;
 								printf("%d player\n", i);
 							}
@@ -134,7 +135,7 @@ void jebi() {
 						snprintf(log, sizeof(log), "player %d fail", turnPlayer);
 						
 						dialog(log);
-						player[turnPlayer] = false;
+						player[turnPlayer].is_alive = false;
 						surPlayers--;
 						n_alive--;
 						cursorRow = 2;
@@ -162,7 +163,7 @@ void jebi() {
 							
 							do {
 								turnPlayer = (turnPlayer + 1) % n_player;
-							} while (!player[turnPlayer]);
+							} while (!player[turnPlayer].is_alive);
 
 
 
@@ -185,11 +186,11 @@ void jebi() {
 			
 		}
 		
-		for (int i = 0; i < 5; i++) {
-			if (player[i] == true) {
-				player[i] = true;
+		/*for (int i = 0; i < n_player; i++) {
+			if (player[i].is_alive == true) {
+				player[i].is_alive = true;
 			}
-		}
+		}*/
 		if (n_alive == 1) {
 			n_player = 1;
 			start = false;
