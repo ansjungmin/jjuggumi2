@@ -19,13 +19,13 @@ int randint(int low, int high) {
 int jjuggumi_init(void) {
 	srand((unsigned int)time(NULL));
 
-	printf("플레이어 수: ");
+	/*printf("플레이어 수: ");
 	scanf_s("%d", &n_player);
 
 	n_alive = n_player;
 	for (int i = 0; i < n_player; i++) {
 		player[i].is_alive = true;
-	}
+	}*/
 
 	FILE* fp;
 	fopen_s(&fp, DATA_FILE, "r");
@@ -94,7 +94,7 @@ int ending() {
 		// 우승자 출력
 		printf(" 우승자: ");
 		for (int i = 0; i < n_player; i++) {
-			if (player[i].is_alive ==true) {
+			if (player[i].is_alive == true) {
 				printf("플레이어 %d", i);
 				break;
 			}
@@ -105,7 +105,7 @@ int ending() {
 int main(void) {
 	jjuggumi_init();
 	intro();
-	mugunghwa();
+	//mugunghwa();
 	//nightgame();
 	//juldarigi();
 	jebi();
