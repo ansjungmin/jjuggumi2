@@ -96,11 +96,11 @@ void print_status(void) {
 	printf("\t\tintl\tstr\tstm\n");
 
 	for (int p = 0; p < n_player; p++) {
-		// Calculate effective intelligence and strength
+		
 		float effective_intel = player[p].intel * (float)player[p].item.stamina_buf / 100.0;
 		float effective_str = player[p].str * (float)player[p].item.stamina_buf / 100.0;
 
-		// Print player status with buffs
+		
 		printf("player %d: %s %.1f(+%d)\t%.1f(+%d)\t%d%%\n",
 			p,
 			player[p].is_alive ? "alive" : "DEAD",
