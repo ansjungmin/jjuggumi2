@@ -74,9 +74,6 @@ void draw(void) {
 
 
 
-
-
-
 void update_stamina(void) {
 	for (int p = 0; p < n_player; p++) {
 		if (player[p].is_alive) {
@@ -88,36 +85,31 @@ void update_stamina(void) {
 				player[p].stamina = 100;
 			}
 
-			
-			if (player[p].hasitem == true) {
-				player[p].stamina += item[p].stamina_buf;
-				if (player[p].stamina > 100) {
-					player[p].stamina = 100;
-				}
-
-			}
 		}
 	}
 }
 
 
-
-
-
-
 void print_status(void) {
 	update_stamina();
 	printf("no. of players left: %d\n", n_alive);
-	printf("		   intl     str     stm\n");
-	for (int p = 0; p < n_player; p++) {
-		printf("player % 2d: % 5s % 3d(% d) % 3d(% d) % 3d % %\n",
-			p, player[p].is_alive ? "alive" : "DEAD",
-			player[p].intel, item[p].intel_buf,
-			player[p].str, item[p].str_buf,
-			player[p].stamina);
+	printf("\t\tintl\tstr\tstm\n");
 
+	for (int p = 0; p < n_player; p++) {
+		// Calculate effective intelligence and strength
+		float effective_intel = player[p].intel * (float)player[p].item.stamina_buf / 100.0;
+		float effective_str = player[p].str * (float)player[p].item.stamina_buf / 100.0;
+
+		// Print player status with buffs
+		printf("player %d: %s %.1f(+%d)\t%.1f(+%d)\t%d%%\n",
+			p,
+			player[p].is_alive ? "alive" : "DEAD",
+			effective_intel, player[p].item.intel_buf,
+			effective_str, player[p].item.str_buf,
+			player[p].stamina);
 	}
 }
+
 
 void dialog(char message[]) {
 	// 현재 화면 저장
