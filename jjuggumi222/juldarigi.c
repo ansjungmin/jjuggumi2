@@ -18,7 +18,7 @@ typedef struct _point
 }point;
 
 
-PLAYER *teams[TOTAL_TEAMS][TEAM_SIZE];
+PLAYER* teams[TOTAL_TEAMS][TEAM_SIZE];
 point pointarr[TOTAL_TEAMS][TEAM_SIZE];
 int linex;
 double str_move = 0;
@@ -28,15 +28,15 @@ bool R_check_lie = false;
 
 void initializeGame() {
     // 초기화 로직을 추가
-    
-    
+
+
     for (int i = 0; i < TEAM_SIZE * TOTAL_TEAMS; i++) {
         if (player[i].is_alive == false)
             player[i].hasitem = false;
 
     }
 
-    for(int i = 0; i < TEAM_SIZE * TOTAL_TEAMS; i++){
+    for (int i = 0; i < TEAM_SIZE * TOTAL_TEAMS; i++) {
         teams[i % 2][i / 2] = &player[i];
     }
 
@@ -50,7 +50,7 @@ void initializeGame() {
         }
     }
 
-    linex = N_COL / 2 ;
+    linex = N_COL / 2;
 }
 
 
@@ -94,7 +94,7 @@ void handleInput() {
             if (L_canlie)
             {
                 L_check_lie = true;
-                
+
                 for (int i = 0; i < TEAM_SIZE; i++)
                 {
 
@@ -166,7 +166,7 @@ void draw_map() {
         back_buf[1][i] = ' ';
     }
 
-    for (int i = linex -1; i <= linex +1; i++)
+    for (int i = linex - 1; i <= linex + 1; i++)
     {
         back_buf[1][i] = '-';
     }
@@ -213,12 +213,12 @@ void juldarigi() {
     }
 
     display();
-    while (running_j){
+    while (running_j) {
         handleInput();
 
         is_one_sec += getTick() - timer;
         timer = getTick();
-        
+
         if (is_one_sec >= 1000)
         {
             if (str_move < 0) {
@@ -277,7 +277,7 @@ void juldarigi() {
 
                 running_j = false;
             }
-            
+
             if (!check_alive(0))
             {
                 for (int i = 0; i < TEAM_SIZE * TOTAL_TEAMS; i++) {
@@ -293,12 +293,12 @@ void juldarigi() {
                     teams[0][i]->intel /= 2;
                     teams[0][i]->str /= 2;
                 }
-                
+
                 running_j = false;
 
             }
 
-            
+
         }
 
         draw_map();
@@ -319,6 +319,3 @@ void juldarigi() {
     }
 
 }
-
-
-// 나머지 부분에 필요한 함수 및 변수를 추가하세요.

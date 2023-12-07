@@ -15,13 +15,13 @@ typedef struct {
 typedef struct {
 	int id;
 	char name[100];
-	// ëŠ¥ë ¥ì¹˜: ì§€ëŠ¥, í˜, ìŠ¤íƒœë¯¸ë‚˜
+	// ´É·ÂÄ¡: Áö´É, Èû, ½ºÅÂ¹Ì³ª
 	int intel, str, stamina;
-	// í˜„ì¬ ìƒíƒœ
+	// ÇöÀç »óÅÂ
 	int n;
-	bool is_alive; // íƒˆë½í–ˆìœ¼ë©´ false
-	bool hasitem; // ì•„ì´í…œì´ ìˆìœ¼ë©´ true
-	ITEM item; // ì•„ì´í…œ 1ê°œ ì¥ì°© ê°€ëŠ¥
+	bool is_alive; // Å»¶ôÇßÀ¸¸é false
+	bool hasitem; // ¾ÆÀÌÅÛÀÌ ÀÖÀ¸¸é true
+	ITEM item; // ¾ÆÀÌÅÛ 1°³ ÀåÂø °¡´É
 } PLAYER;
 
 
@@ -29,9 +29,9 @@ PLAYER player[PLAYER_MAX];
 ITEM item[ITEM_MAX];
 
 int n_player, n_alive, n_item;
-int tick;  // ì‹œê³„
+int tick;  // ½Ã°è
 
-// ë¯¸ë‹ˆê²Œì„
+// ¹Ì´Ï°ÔÀÓ
 
 void mugunghwa(void);
 void nightgame(void);

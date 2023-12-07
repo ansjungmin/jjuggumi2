@@ -12,10 +12,10 @@ bool is_valid(key_t key) {
 		K_RIGHT,
 		K_QUIT,
 		K_Space,
-		K_Z,			
-		K_X,			
-		K_SLASH,		
-		K_DOT	
+		K_Z,
+		K_X,
+		K_SLASH,
+		K_DOT
 	};
 
 	for (int i = 0; i < N_KEY; i++) {

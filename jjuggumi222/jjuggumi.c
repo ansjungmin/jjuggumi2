@@ -1,4 +1,4 @@
-ï»¿#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <time.h>
@@ -10,7 +10,7 @@
 
 int jjuggumi_init(void);
 
-// low ì´ìƒ high ì´í•˜ ë‚œìˆ˜ë¥¼ ë°œìƒì‹œí‚¤ëŠ” í•¨ìˆ˜
+// low ÀÌ»ó high ÀÌÇÏ ³­¼ö¸¦ ¹ß»ı½ÃÅ°´Â ÇÔ¼ö
 int randint(int low, int high) {
 	int rnum = rand() % (high - low + 1) + low;
 	return rnum;
@@ -22,24 +22,24 @@ int jjuggumi_init(void) {
 	FILE* fp;
 	fopen_s(&fp, DATA_FILE, "r");
 	if (fp == NULL) {
-		return -1; // -1 ë¦¬í„´í•˜ë©´ ë©”ì¸í•¨ìˆ˜ì—ì„œ ì²˜ë¦¬í•˜ê³  ì¢…ë£Œ
+		return -1; // -1 ¸®ÅÏÇÏ¸é ¸ŞÀÎÇÔ¼ö¿¡¼­ Ã³¸®ÇÏ°í Á¾·á
 	}
-	// í”Œë ˆì´ì–´ ë°ì´í„° load
+	// ÇÃ·¹ÀÌ¾î µ¥ÀÌÅÍ load
 	fscanf_s(fp, "%d", &n_player);
 	for (int i = 0; i < n_player; i++) {
-		// ì•„ì§ ì•ˆ ë°°ìš´ ë¬¸ë²•(êµ¬ì¡°ì²´ í¬ì¸í„°, ê°„ì ‘ì°¸ì¡°ì—°ì‚°ì)
+		// ¾ÆÁ÷ ¾È ¹è¿î ¹®¹ı(±¸Á¶Ã¼ Æ÷ÀÎÅÍ, °£Á¢ÂüÁ¶¿¬»êÀÚ)
 		PLAYER* p = &player[i];
-		// íŒŒì¼ì—ì„œ ê° ìŠ¤íƒ¯ ìµœëŒ“ê°’ ì½ê¸°
+		// ÆÄÀÏ¿¡¼­ °¢ ½ºÅÈ ÃÖ´ñ°ª ÀĞ±â
 		fscanf_s(fp, "%s%d%d",
 			p->name, (unsigned int)sizeof(p->name),
 			&(p->intel), &(p->str));
 		p->id = i;
 		p->stamina = 100; // 100%
-		// í˜„ì¬ ìƒíƒœ
+		// ÇöÀç »óÅÂ
 		p->is_alive = true;
 		p->hasitem = false;
 	}
-	// ì•„ì´í…œ ë°ì´í„° load
+	// ¾ÆÀÌÅÛ µ¥ÀÌÅÍ load
 	fscanf_s(fp, "%d", &n_item);
 	for (int i = 0; i < n_item; i++) {
 		fscanf_s(fp, "%s%d%d%d",
@@ -57,17 +57,17 @@ int jjuggumi_init(void) {
 }
 
 int intro() {
-	printf("  .ï¼  âŒ’   ï¼¼ \n");
-	printf("  ï¼ã€€ã€€  ã€€ï¼¼		ì­ˆ \n");
-	printf("  /         |ï¼¼		ê¾¸ \n");
-	printf(" (/         | )		ë¯¸ \n");
-	printf(" /          |ã…£		ê²Œ \n");
-	printf(" fã€€ã€€ã€€ã€€   ã…£		ì„ \n");
-	printf(" | â—ã€€ã€€â—    ï½œ \n");
-	printf(" |    â–½   ã€€ ï½œ \n");
-	printf(" ã„´ï¼¿ ï¼¿  ã€€ãƒ \n");
-	printf(" Jä¸ä¸ä¸ä¸ï¿£lï¼¼   \n");
-	printf("ã(_(_(ï¼¿Lï¼¿)ãƒ  \n");
+	printf("  .£¯  ¡Ò   ¡¬ \n");
+	printf("  £¯¡¡¡¡  ¡¡¡¬		ÂŞ \n");
+	printf("  /         |¡¬		²Ù \n");
+	printf(" (/         | )		¹Ì \n");
+	printf(" /          |¤Ó		°Ô \n");
+	printf(" f¡¡¡¡¡¡¡¡   ¤Ó		ÀÓ \n");
+	printf(" | ¡Ü¡¡¡¡¡Ü    £ü \n");
+	printf(" |    ¡ä   ¡¡ £ü \n");
+	printf(" ¤¤£ß £ß  ¡¡«Î \n");
+	printf(" JïËïËïËïË£şl¡¬   \n");
+	printf("ª¯(_(_(£ßL£ß)«Î  \n");
 
 
 	Sleep(500);
@@ -78,21 +78,21 @@ int ending() {
 	printf("         *the end*\n");
 	printf("         *the end*\n");
 	printf("         *the end*\n");
-	printf("	    ã……_ã……  \n");
-	printf("	    ('Ï‰')\n");
-	printf("	ï¼ ï¼µ âˆ½ ï¼µï¼¼\n");
-	printf("	â”‚ï¼Šã€€ê²Œã€€ï¼Šâ”‚\n");
-	printf("	â”‚ï¼Šã€€ì„ã€€ï¼Šâ”‚\n");
-	printf("	â”‚ï¼Šã€€ì¢…ã€€ï¼Šâ”‚\n");
-	printf("	â”‚ï¼Šã€€ë£Œã€€ï¼Šâ”‚\n");
-	printf("	â”‚ï¼Šã€€â˜†ã€€ï¼Š â”‚\n");
-	printf("	ï¿£ï¿£ï¿£ï¿£ï¿£ï¿£ \n");
+	printf("	    ¤µ_¤µ  \n");
+	printf("	    ('¥ø')\n");
+	printf("	£¯ £Õ ¡ï £Õ¡¬\n");
+	printf("	¦¢£ª¡¡°Ô¡¡£ª¦¢\n");
+	printf("	¦¢£ª¡¡ÀÓ¡¡£ª¦¢\n");
+	printf("	¦¢£ª¡¡Á¾¡¡£ª¦¢\n");
+	printf("	¦¢£ª¡¡·á¡¡£ª¦¢\n");
+	printf("	¦¢£ª¡¡¡Ù¡¡£ª ¦¢\n");
+	printf("	£ş£ş£ş£ş£ş£ş \n");
 	if (n_alive == 1) {
-		// ìš°ìŠ¹ì ì¶œë ¥
-		printf(" ìš°ìŠ¹ì: ");
+		// ¿ì½ÂÀÚ Ãâ·Â
+		printf(" ¿ì½ÂÀÚ: ");
 		for (int i = 0; i < n_player; i++) {
-			if (player[i].is_alive ==true) {
-				printf("í”Œë ˆì´ì–´ %d", i);
+			if (player[i].is_alive == true) {
+				printf("ÇÃ·¹ÀÌ¾î %d", i);
 				break;
 			}
 		}
