@@ -1,0 +1,20 @@
+﻿  canvas.c
+C:\Users\jeongmin\source\repos\jjuggumi222\jjuggumi222\canvas.c(133,31): warning C4267: '함수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\jeongmin\source\repos\jjuggumi222\jjuggumi222\canvas.c(121,30): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\jeongmin\source\repos\jjuggumi222\jjuggumi222\canvas.c(128,29): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\jeongmin\source\repos\jjuggumi222\jjuggumi222\canvas.c(146,28): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  jebi.c
+  jjuggumi.c
+  keyin.c
+  mugunghwa.c
+  nightgame.c
+C:\Users\jeongmin\source\repos\jjuggumi222\jjuggumi222\nightgame.c(93,25): warning C4267: '함수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\jeongmin\source\repos\jjuggumi222\jjuggumi222\nightgame.c(97,25): warning C4267: '함수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\jeongmin\source\repos\jjuggumi222\jjuggumi222\nightgame.c(103,23): warning C4267: '함수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\jeongmin\source\repos\jjuggumi222\jjuggumi222\nightgame.c(105,23): warning C4267: '함수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\jeongmin\source\repos\jjuggumi222\jjuggumi222\nightgame.c(501,27): warning C4047: '=': 'int'의 간접 참조 수준이 'void *'과(와) 다릅니다.
+C:\Users\jeongmin\source\repos\jjuggumi222\jjuggumi222\nightgame.c(589,28): warning C4047: '=': 'int'의 간접 참조 수준이 'void *'과(와) 다릅니다.
+  코드를 생성하고 있습니다...
+C:\Users\jeongmin\source\repos\jjuggumi222\jjuggumi222\jjuggumi.c(72): warning C4716: 'intro': 값을 반환해야 합니다.
+C:\Users\jeongmin\source\repos\jjuggumi222\jjuggumi222\jjuggumi.c(98): warning C4716: 'ending': 값을 반환해야 합니다.
+  jjuggumi222.vcxproj -> C:\Users\jeongmin\source\repos\jjuggumi222\x64\Debug\jjuggumi222.exe
