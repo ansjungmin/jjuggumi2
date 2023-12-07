@@ -8,6 +8,7 @@
 #include <conio.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <math.h>
 
 #define DIR_UP		0
 #define DIR_DOWN	1
@@ -17,12 +18,11 @@
 
 void init_nightgame();
 void item_spawn();
-void chocie(int, int);
+void chocie(int ,int );
 void depredation(int, int);
-void conciliate(int, int);
-void hasitem_choice(int, int, int);
+void conciliate(int , int );
+void hasitem_choice(int,int,int);
 void move_manual(key_t key);
-int ai_search(int, int, int);
 void move_random(int i, int dir);
 void move_tail(int i, int nx, int ny);
 
@@ -161,10 +161,10 @@ void chocie(int p1, int p2) {
 	}
 }
 
-void depredation(int p1, int p2) {
+void depredation(int p1,int p2) {
 	int p1_str = player[p1].str + player[p1].item.str_buf;
 	int p2_str = player[p2].str + player[p2].item.str_buf;
-	int dummy = ITEM_MAX - 1;
+	int dummy = ITEM_MAX-1;
 	if (p1 == 0) {
 		if (p1_str > p2_str) {
 			if (player[p1].hasitem == true) {
@@ -371,7 +371,7 @@ void conciliate(int p1, int p2) {
 	}
 }
 
-void hasitem_choice(int p1, int nx, int ny) {
+void hasitem_choice(int p1,int nx,int ny) {
 	srand((unsigned int)time(NULL));
 	int number;
 	int dummy = player[p1].n;
@@ -401,7 +401,7 @@ void hasitem_choice(int p1, int nx, int ny) {
 		printf("                                                     ");
 	}
 	else {
-		number = rand() % 2 + 1;
+		number = rand() % 2+1;
 		switch (number)
 		{
 		case 1:strncpy(player[p1].item.name, item[item_buf[nx][ny]].name, 100);
@@ -437,12 +437,12 @@ void move_manual(key_t key) {
 	nx = px[0] + dx[dir];
 	ny = py[0] + dy[dir];
 	if (back_buf[nx][ny] == '1') {
-		chocie(0, 1);
+		chocie(0,1);
 		if (!placable(nx, ny)) {
 			return;
 		}
 	}
-	else if (back_buf[nx][ny] == '2') {
+	else if(back_buf[nx][ny] == '2' ){
 		chocie(0, 2);
 		if (!placable(nx, ny)) {
 			return;
@@ -501,7 +501,7 @@ void move_manual(key_t key) {
 			item_buf[nx][ny] = NULL;
 		}
 		else if (player[0].hasitem = true) {
-			hasitem_choice(0, nx, ny);
+			hasitem_choice(0,nx,ny);
 			if (!placable(nx, ny)) {
 				return;
 			}
@@ -519,7 +519,7 @@ void move_manual(key_t key) {
 void move_random(int p, int dir) {
 	int nx, ny;
 	int p2;
-	do {
+	do{
 		nx = px[p] + randint(-1, 1);
 		ny = py[p] + randint(-1, 1);
 		if (player[p].stamina > 0) {
@@ -602,7 +602,7 @@ void move_random(int p, int dir) {
 
 
 void move_tail(int player, int nx, int ny) {
-	int p = player;
+	int p = player;  
 	back_buf[nx][ny] = back_buf[px[p]][py[p]];
 	back_buf[px[p]][py[p]] = ' ';
 	px[p] = nx;
@@ -643,3 +643,4 @@ void nightgame() {
 		tick += 10;
 	}
 }
+
