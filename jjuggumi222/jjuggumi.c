@@ -1,4 +1,4 @@
-#include <stdio.h>
+﻿#include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <time.h>
@@ -33,6 +33,7 @@ int jjuggumi_init(void) {
 		fscanf_s(fp, "%s%d%d",
 			p->name, (unsigned int)sizeof(p->name),
 			&(p->intel), &(p->str));
+		p->id = i;
 		p->stamina = 100; // 100%
 		// 현재 상태
 		p->is_alive = true;
@@ -54,6 +55,7 @@ int jjuggumi_init(void) {
 	}
 	return 0;
 }
+
 int intro() {
 	printf("  .／  ⌒   ＼ \n");
 	printf("  ／　　  　＼		쭈 \n");
@@ -89,7 +91,7 @@ int ending() {
 		// 우승자 출력
 		printf(" 우승자: ");
 		for (int i = 0; i < n_player; i++) {
-			if (player[i].is_alive == true) {
+			if (player[i].is_alive ==true) {
 				printf("플레이어 %d", i);
 				break;
 			}
