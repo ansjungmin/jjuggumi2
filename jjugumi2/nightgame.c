@@ -29,44 +29,42 @@ void move_tail(int i, int nx, int ny);
 int item_buf[ROW_MAX][COL_MAX];
 int px[PLAYER_MAX], py[PLAYER_MAX], period[PLAYER_MAX];
 int ix[ITEM_MAX], iy[ITEM_MAX];
-char strn[] = { "0ì´" };
-char strn2[] = { "0ë²ˆì—ê²Œ ì‹œë„" };
-
-//í”Œë ˆì´ì–´ë“¤ ë°°ì¹˜ì¹˜
+char strn[] = { "0ÀÌ" };
+char strn2[] = { "0¹ø¿¡°Ô ½Ãµµ" };
 void init_nightgame() {
 	map_init(8, 23);
 	int x, y;
 	for (int i = 0; i < n_player; i++) {
-		do {
-			x = randint(1, N_ROW - 2);
-			y = randint(1, N_COL - 2);
-		} while (!placable(x, y));
-		px[i] = x;
-		py[i] = y;
-		period[i] = randint(100, 300);
 		if (player[i].is_alive == true) {
+			do {
+				x = randint(1, N_ROW - 2);
+				y = randint(1, N_COL - 2);
+			} while (!placable(x, y));
+			px[i] = x;
+			py[i] = y;
+			period[i] = randint(100, 200);
 			back_buf[px[i]][py[i]] = '0' + i;
 		}
 	}
 	item_spawn();
 }
-//ì•„ì´í…œ ìŠ¤í°
+
 void item_spawn() {
 	srand((unsigned int)time(NULL));
-	int n_item = 5; //ì•„ì´í…œ ê°¯ìˆ˜ë¥¼ ì§€ì •í•˜ëŠ” í•¨ìˆ˜
+	int n_item = 10;
 	int x, y;
 	for (int i = 0; i < n_item; i++) {
 		do {
-			x = randint(2, N_ROW - 2);
-			y = randint(2, N_COL - 2);
+			x = randint(2, N_ROW - 3);
+			y = randint(2, N_COL - 3);
 		} while (!placable(x, y));
 		ix[i] = x;
 		iy[i] = y;
 		back_buf[ix[i]][iy[i]] = 'I';
-		item_buf[ix[i]][iy[i]] = rand() % 7; // ì•„ì´í…œ ë°°ì¹˜ì— ë¬´ìŠ¨ì•„ì´í…œìœ¼ë¡œ ë°°ì¹˜í• ì§€ ì •í•˜ëŠ” ëœë¤í•¨ìˆ˜ìˆ˜
+		item_buf[ix[i]][iy[i]] = rand() % 7;
 	}
 }
-//ì„ íƒì§€ì§€
+
 void chocie(int p1, int p2) {
 	srand((unsigned int)time(NULL));
 	int number;
@@ -74,7 +72,7 @@ void chocie(int p1, int p2) {
 	int i = 0;
 	if (p1 == 0) {
 		gotoxy(N_ROW + 1, 0);
-		printf("ì„ íƒì§€(1.ê°•íƒˆì‹œë„(str) /2.íšŒìœ ì‹œë„(int) /3.ë¬´ì‹œ ) : ");
+		printf("¼±ÅÃÁö(1.°­Å»½Ãµµ(str) /2.È¸À¯½Ãµµ(int) /3.¹«½Ã ) : ");
 		while (i == 0) {
 			scanf_s("%d", &number);
 			if (number > 0 && number < 4) {
@@ -82,29 +80,29 @@ void chocie(int p1, int p2) {
 					switch (number) {
 					case 1: depredation(p1, p2); i++; break;
 					case 2: conciliate(p1, p2); i++; break;
-					case 3: printf("ë¬´ì‹œí–ˆë‹¤"); Sleep(1000); i++; break;
+					case 3: printf("¹«½ÃÇß´Ù"); Sleep(1000); i++; break;
 					}
 				}
 				else {
 					if (number == 3) {
-						printf("ë¬´ì‹œí–ˆë‹¤"); Sleep(1000); i++;
+						printf("¹«½ÃÇß´Ù"); Sleep(1000); i++;
 					}
 					else {
-						printf("ìŠ¤í…Œë¯¸ë‚˜ ë¶€ì¡±");
+						printf("½ºÅ×¹Ì³ª ºÎÁ·");
 						Sleep(1000);
-						gotoxy(N_ROW + 1, strlen("ì„ íƒì§€(1.ê°•íƒˆì‹œë„(str) /2.íšŒìœ ì‹œë„(int) /3.ë¬´ì‹œ ) : "));
+						gotoxy(N_ROW + 1, strlen("¼±ÅÃÁö(1.°­Å»½Ãµµ(str) /2.È¸À¯½Ãµµ(int) /3.¹«½Ã ) : "));
 						printf("                                                     ");
 						gotoxy(N_ROW + 2, 0);
 						printf("                                                     ");
-						gotoxy(N_ROW + 1, strlen("ì„ íƒì§€(1.ê°•íƒˆì‹œë„(str) /2.íšŒìœ ì‹œë„(int) /3.ë¬´ì‹œ ) : "));
+						gotoxy(N_ROW + 1, strlen("¼±ÅÃÁö(1.°­Å»½Ãµµ(str) /2.È¸À¯½Ãµµ(int) /3.¹«½Ã ) : "));
 						continue;
 					}
 				}
 			}
 			else {
-				gotoxy(N_ROW + 1, strlen("ì„ íƒì§€(1.ê°•íƒˆì‹œë„(str) /2.íšŒìœ ì‹œë„(int) /3.ë¬´ì‹œ ) : "));
+				gotoxy(N_ROW + 1, strlen("¼±ÅÃÁö(1.°­Å»½Ãµµ(str) /2.È¸À¯½Ãµµ(int) /3.¹«½Ã ) : "));
 				printf("                                                     ");
-				gotoxy(N_ROW + 1, strlen("ì„ íƒì§€(1.ê°•íƒˆì‹œë„(str) /2.íšŒìœ ì‹œë„(int) /3.ë¬´ì‹œ ) : "));
+				gotoxy(N_ROW + 1, strlen("¼±ÅÃÁö(1.°­Å»½Ãµµ(str) /2.È¸À¯½Ãµµ(int) /3.¹«½Ã ) : "));
 				continue;
 			}
 		}
@@ -162,7 +160,7 @@ void chocie(int p1, int p2) {
 		}
 	}
 }
-//ê°•íƒˆì‹œë„ë„
+
 void depredation(int p1,int p2) {
 	int p1_str = player[p1].str + player[p1].item.str_buf;
 	int p2_str = player[p2].str + player[p2].item.str_buf;
@@ -185,11 +183,11 @@ void depredation(int p1,int p2) {
 					player[p2].item.intel_buf = player[dummy].item.intel_buf;
 					player[p2].item.str_buf = player[dummy].item.str_buf;
 					player[p2].item.stamina_buf = player[dummy].item.stamina_buf;
-					printf("ê°•íƒˆ ì„±ê³µ %d ìŠ¤í…Œë¯¸ë‚˜ : -40%%", p1);
+					printf("°­Å» ¼º°ø %d ½ºÅ×¹Ì³ª : -40%%", p1);
 					player[p1].stamina -= 40;
 				}
 				else {
-					printf("ìƒëŒ€ê°€ ì•„ì´í…œì„ ê°–ê³ ìˆì§€ì•Šë‹¤.");
+					printf("»ó´ë°¡ ¾ÆÀÌÅÛÀ» °®°íÀÖÁö¾Ê´Ù.");
 					player[p1].stamina -= 40;
 				}
 			}
@@ -209,12 +207,12 @@ void depredation(int p1,int p2) {
 				player[p2].item.intel_buf = player[dummy].item.intel_buf;
 				player[p2].item.str_buf = player[dummy].item.str_buf;
 				player[p2].item.stamina_buf = player[dummy].item.stamina_buf;
-				printf("ê°•íƒˆ ì„±ê³µ %d ìŠ¤í…Œë¯¸ë‚˜ : -40%%", p1);
+				printf("°­Å» ¼º°ø %d ½ºÅ×¹Ì³ª : -40%%", p1);
 				player[p1].stamina -= 40;
 			}
 		}
 		else if (p1_str < p2_str) {
-			printf("ê°•íƒˆ ì‹¤íŒ¨ %d ìŠ¤í…Œë¯¸ë‚˜ : -60%%", p1);
+			printf("°­Å» ½ÇÆĞ %d ½ºÅ×¹Ì³ª : -60%%", p1);
 			player[p1].stamina -= 60;
 		}
 		Sleep(1000);
@@ -267,7 +265,7 @@ void depredation(int p1,int p2) {
 		}
 	}
 }
-//íšŒìœ ì‹œë„ë„
+
 void conciliate(int p1, int p2) {
 	int p1_int = player[p1].intel + player[p1].item.intel_buf;
 	int p2_int = player[p2].intel + player[p2].item.intel_buf;
@@ -290,11 +288,11 @@ void conciliate(int p1, int p2) {
 					player[p2].item.intel_buf = player[dummy].item.intel_buf;
 					player[p2].item.str_buf = player[dummy].item.str_buf;
 					player[p2].item.stamina_buf = player[dummy].item.stamina_buf;
-					printf("íšŒìœ  ì„±ê³µ %d ìŠ¤í…Œë¯¸ë‚˜ : -20%%", p1);
+					printf("È¸À¯ ¼º°ø %d ½ºÅ×¹Ì³ª : -20%%", p1);
 					player[p1].stamina -= 20;
 				}
 				else {
-					printf("ìƒëŒ€ê°€ ì•„ì´í…œì„ ê°–ê³ ìˆì§€ì•Šë‹¤.");
+					printf("»ó´ë°¡ ¾ÆÀÌÅÛÀ» °®°íÀÖÁö¾Ê´Ù.");
 					player[p1].stamina -= 20;
 				}
 			}
@@ -314,12 +312,12 @@ void conciliate(int p1, int p2) {
 				player[p2].item.intel_buf = player[dummy].item.intel_buf;
 				player[p2].item.str_buf = player[dummy].item.str_buf;
 				player[p2].item.stamina_buf = player[dummy].item.stamina_buf;
-				printf("íšŒìœ  ì„±ê³µ %d ìŠ¤í…Œë¯¸ë‚˜ : -20%%", p1);
+				printf("È¸À¯ ¼º°ø %d ½ºÅ×¹Ì³ª : -20%%", p1);
 				player[p1].stamina -= 20;
 			}
 		}
 		else if (p1_int < p2_int) {
-			printf("íšŒìœ  ì‹¤íŒ¨ %d ìŠ¤í…Œë¯¸ë‚˜ : -40%%", p1);
+			printf("È¸À¯ ½ÇÆĞ %d ½ºÅ×¹Ì³ª : -40%%", p1);
 			player[p1].stamina -= 40;
 		}
 		Sleep(1000);
@@ -372,14 +370,14 @@ void conciliate(int p1, int p2) {
 		}
 	}
 }
-//ì•„ì´í…œ êµì²´ ì„ íƒì§€
+
 void hasitem_choice(int p1,int nx,int ny) {
 	srand((unsigned int)time(NULL));
 	int number;
 	int dummy = player[p1].n;
 	if (p1 == 0) {
 		gotoxy(N_ROW + 1, 0);
-		printf("ì„ íƒì§€(1.ì•„ì´í…œ êµì²´ /2.ì§€ë‚˜ê°„ë‹¤ ) : ");
+		printf("¼±ÅÃÁö(1.¾ÆÀÌÅÛ ±³Ã¼ /2.Áö³ª°£´Ù ) : ");
 		scanf_s("%d", &number);
 		switch (number)
 		{
@@ -389,11 +387,11 @@ void hasitem_choice(int p1,int nx,int ny) {
 			player[p1].item.stamina_buf = item[item_buf[nx][ny]].stamina_buf;
 			player[p1].n = item_buf[nx][ny];
 			item_buf[nx][ny] = dummy;
-			printf("êµì²´í–ˆë‹¤");
+			printf("±³Ã¼Çß´Ù");
 			Sleep(500);
 			break;
 		case 2:
-			printf("ì§€ë‚˜ê°”ë‹¤");
+			printf("Áö³ª°¬´Ù");
 			Sleep(500);
 			break;
 		}
@@ -419,13 +417,13 @@ void hasitem_choice(int p1,int nx,int ny) {
 	}
 }
 
-//0í”Œë ˆì´ì–´ ì›€ì§ì„
+
 void move_manual(key_t key) {
-	// ê° ë°©í–¥ìœ¼ë¡œ ì›€ì§ì¼ ë•Œ x, yê°’ delta
+	// °¢ ¹æÇâÀ¸·Î ¿òÁ÷ÀÏ ¶§ x, y°ª delta
 	static int dx[4] = { -1, 1, 0, 0 };
 	static int dy[4] = { 0, 0, -1, 1 };
 
-	int dir;  // ì›€ì§ì¼ ë°©í–¥(0~3)
+	int dir;  // ¿òÁ÷ÀÏ ¹æÇâ(0~3)
 	switch (key) {
 	case K_UP: dir = DIR_UP; break;
 	case K_DOWN: dir = DIR_DOWN; break;
@@ -434,7 +432,7 @@ void move_manual(key_t key) {
 	default: return;
 	}
 
-	// ì›€ì§ì—¬ì„œ ë†“ì¼ ìë¦¬
+	// ¿òÁ÷¿©¼­ ³õÀÏ ÀÚ¸®
 	int nx, ny;
 	nx = px[0] + dx[dir];
 	ny = py[0] + dy[dir];
@@ -517,7 +515,7 @@ void move_manual(key_t key) {
 
 	move_tail(0, nx, ny);
 }
-//0ë²ˆì œì™¸ í”Œë ˆì´ì–´ ì›€ì§ì„ì„
+
 void move_random(int p, int dir) {
 	int nx, ny;
 	int p2;
@@ -618,7 +616,7 @@ void nightgame() {
 	system("cls");
 	display();
 	while (1) {
-		// player 0ë§Œ ì†ìœ¼ë¡œ ì›€ì§ì„(4ë°©í–¥)
+		// player 0¸¸ ¼ÕÀ¸·Î ¿òÁ÷ÀÓ(4¹æÇâ)
 		key_t key = get_key();
 		if (key == K_QUIT) {
 			break;
@@ -633,7 +631,7 @@ void nightgame() {
 				}
 			}
 		}
-		// player 1 ë¶€í„°ëŠ” ëœë¤ìœ¼ë¡œ ì›€ì§ì„(8ë°©í–¥)
+		// player 1 ºÎÅÍ´Â ·£´ıÀ¸·Î ¿òÁ÷ÀÓ(8¹æÇâ)
 		for (int i = 1; i < n_player; i++) {
 			if (tick % period[i] == 0) {
 				move_random(i, -1);
